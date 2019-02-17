@@ -1,2 +1,16 @@
 ---
-# tasks file for ansible-azure-networkinterface
+- name: Create a network interface using existing security group and public IP
+  azure_rm_networkinterface:
+    name: "{{ item }}"
+    resource_group: "{{ resource_group }}"
+    virtual_network: "{{ VNET }}"
+    subnet_name: "{{ subnet }}"
+    security_group: "{{ security_group }}"
+    ip_configurations:
+      - name: ipconfig1
+        public_ip_address_name: "{{ item }}"
+        primary: True
+    tags:
+      service: ansible
+      purpose: automation
+  with_items: "{{ nicname }}"
