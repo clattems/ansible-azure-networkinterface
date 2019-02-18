@@ -2,6 +2,7 @@
 - name: Create a network interface using existing security group and public IP
   azure_rm_networkinterface:
     name: "{{ item }}"
+    state: "{{ state }}"
     resource_group: "{{ resource_group }}"
     virtual_network: "{{ VNET }}"
     subnet_name: "{{ subnet }}"
